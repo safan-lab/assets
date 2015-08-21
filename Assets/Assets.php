@@ -18,17 +18,22 @@ class Assets
     private $assetsUri = '';
 
     /**
-     * @var
+     * @var Configuration $config
+     */
+    private $config;
+
+    /**
+     * @var Compressor $compressor
      */
     private $compressor;
 
     /**
-     * @var object
+     * @var CssManager $cssManager
      */
     private $cssManager;
 
     /**
-     * @var object
+     * @var JsManager $jsManager
      */
     private $jsManager;
 
@@ -44,13 +49,21 @@ class Assets
         $config->buildConfig($params);
         // check driver
         $this->assetsUri  = Safan::handler()->baseUrl . '/' . $config->getPath();
-        $this->compressor = new Compressor($config->getPath());
+        $this->compressor = new Compressor($config);
         $this->cssManager = new CssManager();
         $this->jsManager  = new JsManager();
+        $this->config     = $config;
 
         // set to object manager
         $om = Safan::handler()->getObjectManager();
         $om->setObject('assets', $this);
+    }
+
+    /**
+     * @return Configuration
+     */
+    public function getConfig(){
+        return $this->config;
     }
 
     /**

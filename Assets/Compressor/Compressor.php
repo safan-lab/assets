@@ -2,6 +2,7 @@
 
 namespace Assets\Compressor;
 
+use Assets\DependencyInjection\Configuration;
 use Assets\Exceptions\DirectoryException;
 
 class Compressor
@@ -12,12 +13,12 @@ class Compressor
     private $assetsPath = '';
 
     /**
-     * @param string $assetsPath
+     * @param  Configuration $config
      * @throws \Assets\Exceptions\DirectoryException
      */
-    public function __construct($assetsPath){
+    public function __construct(Configuration $config){
         // set paths
-        $this->assetsPath = APP_BASE_PATH . DS . 'resource' . DS . $assetsPath;
+        $this->assetsPath = APP_BASE_PATH . DS . 'resource' . DS . $config->getPath();
 
         if(!is_writable($this->assetsPath))
             throw new DirectoryException('Assets path is not writable');
@@ -43,7 +44,7 @@ class Compressor
                 if($filename != '.' && $filename != '..'){
                     $currentPath = $path . DS . $filename;
 
-                    $newAsset = $assetPath . DS . strtolower($moduleName) . DS . $assetSubPath . DS . $filename;
+                    $newAsset = $assetPath . DS . strtolower(str_replace('\\', '/', $moduleName)) . DS . $assetSubPath . DS . $filename;
 
                     $newAsset = str_replace('//', '/', $newAsset);
 
