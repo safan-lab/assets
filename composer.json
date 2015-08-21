@@ -1,0 +1,17 @@
+{
+    "name": "safan-lab/assets",
+    "type": "library",
+    "description": "Assets Manager",
+    "keywords": ["assets", "css", "js", "compressor", "minify", "safan framework"],
+    "homepage": "http://www.safanlab.com",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Safan Lab",
+            "homepage": "http://www.safanlab.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0"
+    }
+}
