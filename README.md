@@ -12,7 +12,7 @@ If you're using [Composer](http://getcomposer.org/) for your project's dependenc
 
 ```
 "require": {
-    "safan-lab/assets": "1.0.*"
+    "safan-lab/assets": "1.*"
 }
 ```
 Update Modules Config List - safan-framework-standard/application/Settings/modules.config.php
