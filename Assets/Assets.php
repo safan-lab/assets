@@ -88,7 +88,7 @@ class Assets
      * @throws \Safan\GlobalExceptions\ParamsNotFoundException
      * @throws \Safan\GlobalExceptions\FileNotFoundException
      */
-    public function __invoke($filePath, $attributes = array()){
+    public function __invoke($filePath, $attributes = []){
         $asset = explode(':', $filePath);
         if(sizeof($asset) !== 2)
             throw new FileNotFoundException('Css asset name is not correct');
@@ -164,7 +164,7 @@ class Assets
      */
     private function translator($files){
         // empty array for return
-        $fileArray = array();
+        $fileArray = [];
         // get modules
         $modules = Safan::handler()->getModules();
 

@@ -27,7 +27,7 @@ class JsManager
     /**
      * @var array
      */
-    public $js = array();
+    public $js = [];
 
     /**
      * Check dir for css files

@@ -27,7 +27,7 @@ class CssManager
     /**
      * @var array
      */
-    public $css = array();
+    public $css = [];
 
     /**
      * Check dir for css files
@@ -76,7 +76,7 @@ class CssManager
         $buffer = str_replace(': ', ':', $buffer);
 
         // Remove whitespace
-        $buffer = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $buffer);
+        $buffer = str_replace(["\r\n", "\r", "\n", "\t", '  ', '    ', '    '], '', $buffer);
 
         // Write everything out
         $filePath = APP_BASE_PATH . DS . 'resource' . $this->cacheDir . DS . $cacheFileName;
