@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * This file is part of the Safan package.
+ *
+ * (c) Harut Grigoryan <ceo@safanlab.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Assets\Compressor;
 
 use Assets\DependencyInjection\Configuration;
@@ -43,10 +50,8 @@ class Compressor
             while (false !== ($filename = readdir($dh))) {
                 if($filename != '.' && $filename != '..'){
                     $currentPath = $path . DS . $filename;
-
-                    $newAsset = $assetPath . DS . strtolower(str_replace('\\', '/', $moduleName)) . DS . $assetSubPath . DS . $filename;
-
-                    $newAsset = str_replace('//', '/', $newAsset);
+                    $newAsset    = $assetPath . DS . strtolower(str_replace('\\', '/', $moduleName)) . DS . $assetSubPath . DS . $filename;
+                    $newAsset    = str_replace('//', '/', $newAsset);
 
                     if(is_file($currentPath) && file_exists($currentPath)){
                         copy($currentPath, $newAsset);

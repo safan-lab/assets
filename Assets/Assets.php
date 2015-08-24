@@ -1,5 +1,12 @@
 <?php
-
+/**
+ * This file is part of the Safan package.
+ *
+ * (c) Harut Grigoryan <ceo@safanlab.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Assets;
 
 use Assets\Compressor\Compressor;
@@ -47,6 +54,7 @@ class Assets
         // build config parameters
         $config = new Configuration();
         $config->buildConfig($params);
+
         // check driver
         $this->assetsUri  = Safan::handler()->baseUrl . '/' . $config->getPath();
         $this->compressor = new Compressor($config);
@@ -99,7 +107,6 @@ class Assets
 
         // get file extension
         $extension = end(explode('.', $fullPath));
-
         $assetLink = $this->assetsUri . '/' . strtolower($moduleName) . '/' . $filePath;
 
         if($extension == 'css'){
@@ -167,7 +174,7 @@ class Assets
                 throw new FileNotFoundException('Css asset name is not correct');
 
             $moduleName = $asset[0];
-            $filePath = $asset[1];
+            $filePath   = $asset[1];
 
             if(!isset($modules[$moduleName]))
                 throw new FileNotFoundException('Asset module is not define');

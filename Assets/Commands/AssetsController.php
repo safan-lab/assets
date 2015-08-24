@@ -1,4 +1,12 @@
 <?php
+/**
+ * This file is part of the Safan package.
+ *
+ * (c) Harut Grigoryan <ceo@safanlab.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Assets\Commands;
 
 use Safan\CliManager\CliManager;
@@ -31,6 +39,7 @@ class AssetsController
         $assets = Safan::handler()->getObjectManager()->get('assets');
         // get assets path
         $path = $assets->getCompressor()->getAssetsPath();
+
         if(is_dir($path))
             shell_exec('rm -rf ' . $path . DS . '*');
         else
