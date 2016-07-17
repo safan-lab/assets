@@ -58,8 +58,8 @@ class Assets
         // check driver
         $this->assetsUri  = Safan::handler()->baseUrl . '/' . $config->getPath();
         $this->compressor = new Compressor($config);
-        $this->cssManager = new CssManager();
-        $this->jsManager  = new JsManager();
+        $this->cssManager = new CssManager(DS . $config->getPath() . DS . 'css');
+        $this->jsManager  = new JsManager(DS . $config->getPath() . DS . 'js');
         $this->config     = $config;
 
         // set to object manager

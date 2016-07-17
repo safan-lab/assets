@@ -22,7 +22,7 @@ class JsManager
     /**
      * @var string
      */
-    private $cacheDir = '/assets/js';
+    private $cacheDir = '';
 
     /**
      * @var array
@@ -31,9 +31,13 @@ class JsManager
 
     /**
      * Check dir for css files
+     *
+     * JsManager constructor.
+     * @param string $cacheDir
      */
-    public function __construct(){
-        $jsDir = APP_BASE_PATH . DS . 'resource' . $this->cacheDir;
+    public function __construct($cacheDir){
+        $this->cacheDir = $cacheDir;
+        $jsDir          = APP_BASE_PATH . DS . 'resource' . $this->cacheDir;
 
         if(!is_dir($jsDir)){
             mkdir($jsDir, 0777, true);

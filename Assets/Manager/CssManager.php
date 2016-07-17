@@ -22,7 +22,7 @@ class CssManager
     /**
      * @var string
      */
-    private $cacheDir = '/assets/css';
+    private $cacheDir = '';
 
     /**
      * @var array
@@ -31,11 +31,15 @@ class CssManager
 
     /**
      * Check dir for css files
+     *
+     * CssManager constructor.
+     * @param string $cacheDir
      */
-    public function __construct(){
-        $cssDir = APP_BASE_PATH . DS . 'resource' . $this->cacheDir;
+    public function __construct($cacheDir){
+        $this->cacheDir = $cacheDir;
+        $cssDir         = APP_BASE_PATH . DS . 'resource' . $this->cacheDir;
 
-        if(!is_dir($cssDir)){
+        if (!is_dir($cssDir)) {
             mkdir($cssDir, 0777, true);
             chmod($cssDir, 0777);
         }
