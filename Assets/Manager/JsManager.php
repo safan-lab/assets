@@ -25,6 +25,11 @@ class JsManager
     private $cacheDir = '';
 
     /**
+     * @var bool
+     */
+    private $version = false;
+    
+    /**
      * @var array
      */
     public $js = [];
@@ -33,10 +38,13 @@ class JsManager
      * Check dir for css files
      *
      * JsManager constructor.
-     * @param string $cacheDir
+     * @param $cacheDir
+     * @param $version
      */
-    public function __construct($cacheDir){
+    public function __construct($cacheDir, $version = false)
+    {
         $this->cacheDir = $cacheDir;
+        $this->version  = $version;
         $jsDir          = APP_BASE_PATH . DS . 'resource' . $this->cacheDir;
 
         if(!is_dir($jsDir)){
@@ -48,7 +56,8 @@ class JsManager
     /**
      * @return object
      */
-    public function getJs(){
+    public function getJs()
+    {
         return $this->js;
     }
 
@@ -58,7 +67,8 @@ class JsManager
      * @return bool|void
      * @throws \Safan\GlobalExceptions\FileNotFoundException
      */
-    public function compressFiles($files, $cacheFileName = ''){
+    public function compressFiles($files, $cacheFileName = '')
+    {
         if(empty($files))
             return false;
 
@@ -90,7 +100,8 @@ class JsManager
      * @param $string
      * @return int
      */
-    private function fwriteStream($fp, $string) {
+    private function fwriteStream($fp, $string) 
+    {
         for ($written = 0; $written < strlen($string); $written += $fwrite) {
             $fwrite = fwrite($fp, substr($string, $written));
 
@@ -102,9 +113,10 @@ class JsManager
     }
 
     /**
-     *
+     * @param $filePath
      */
-    private function minify($filePath){
+    private function minify($filePath)
+    {
         shell_exec('java -jar '. dirname(__FILE__) . DS . 'yui' . DS .'yuicompressor-'. $this->yuiVersion .'.jar --type=js '. $filePath .' -o ' . $filePath);
     }
 
@@ -112,7 +124,8 @@ class JsManager
      * @param $files
      * @return bool
      */
-    public function checkCustomAssets($files){
+    public function checkCustomAssets($files)
+    {
         if(empty($files))
             return false;
 
@@ -131,7 +144,13 @@ class JsManager
      * @param $fileUrl
      * @return string
      */
-    public function getCacheFile($fileUrl){
-        return '<script type="text/javascript" src="'. $fileUrl .'"></script>';
+    public function getCacheFile($fileUrl)
+    {
+        $version = '';
+        if ($this->version) {
+            $version = '?v=' . $this->version;
+        }
+        
+        return '<script type="text/javascript" src="'. $fileUrl . $version .'"></script>';
     }
 }
